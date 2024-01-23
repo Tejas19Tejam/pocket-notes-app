@@ -1,8 +1,10 @@
-
+import styles from './app.css'
 
 
 function App() {
-  return <h1>Pocket App</h1>
-}
-
-export default App
+  return <>
+  <aside className={styles.aside}></aside>
+  <main  className={styles.main}></main>
+  </>
+} 
+export default App;
