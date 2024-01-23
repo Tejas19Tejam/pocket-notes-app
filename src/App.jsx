@@ -1,4 +1,4 @@
-import styles from './app.css'
+import styles from './app.module.css'
 
 
 function App() {
