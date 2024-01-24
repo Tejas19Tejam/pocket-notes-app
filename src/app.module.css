@@ -1,4 +1,81 @@
+.main {
+  display: grid;
+  grid-template-columns: 0.8fr 3fr;
+  height: 100dvh;
+}
 
-.aside{
-    background-color: red;
+/* BOX LEFT (NOTES GROUPS) */
+
+.box_left {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 3.6rem;
+  letter-spacing: 1.2px;
+  margin: 4.8rem auto;
+}
+
+.box_left__container {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  list-style: none;
+  gap: 2.4rem;
+  align-items: center;
+  padding: 1.6rem 3.2rem;
+  cursor: pointer;
+}
+
+.item_abbrivation {
+  color: var(--color-text-dark);
+  border-radius: 100%;
+  background-color: var(--color-background-dark);
+  font-size: 2.4rem;
+  padding: 2.1rem 1.8rem;
+  letter-spacing: 0.75px;
+  font-weight: 500;
+}
+
+.item_text {
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1.6;
+  text-transform: capitalize;
+}
+
+.box_left__button {
+  align-self: flex-end;
+  margin: auto 2.4rem 1.8rem 0;
+  padding: 1.5rem;
+  border-radius: 100%;
+  border: none;
+  background-color: var(--color-primary-950);
+}
+
+.color_purple {
+  background-color: #b38bfa;
+}
+
+.color_pink {
+  background-color: #ff79f2;
+}
+
+.color_cyan {
+  background-color: #22d3ee;
+}
+
+.color_salamon {
+  background-color: #f19576;
+}
+
+/* BOX RIGHT (NOTES SECTION) */
+.box_right {
+  border: 1px solid rgb(0, 255, 85);
 }
