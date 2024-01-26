@@ -14,7 +14,8 @@
 
 .title {
   font-size: 3.6rem;
-  letter-spacing: 1.2px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
   margin: 4.8rem auto;
 }
 
@@ -24,6 +25,21 @@
   overflow-y: auto;
 }
 
+.box_left__container::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+.box_left__container::-webkit-scrollbar-track {
+  background-color: var(--color-grey-medium);
+}
+
+.box_left__container::-webkit-scrollbar-thumb {
+  background-color: var(--color-background-light);
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-clip: padding-box;
+}
+
 .item {
   display: flex;
   list-style: none;
@@ -31,12 +47,19 @@
   align-items: center;
   padding: 1.6rem 3.2rem;
   cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 11px;
 }
 
-.item_abbrivation {
+.item:active,
+.item:hover {
+  background-color: var(--color-grey-medium);
+}
+
+.item_abbreviation {
   color: var(--color-text-dark);
   border-radius: 100%;
-  background-color: var(--color-background-dark);
+  background-color: var(--color-grey-dark);
   font-size: 2.4rem;
   padding: 2.1rem 1.8rem;
   letter-spacing: 0.75px;
@@ -55,27 +78,88 @@
   margin: auto 2.4rem 1.8rem 0;
   padding: 1.5rem;
   border-radius: 100%;
-  border: none;
   background-color: var(--color-primary-950);
 }
 
-.color_purple {
-  background-color: #b38bfa;
+/* PROMPT BOX  */
+
+.prompt {
+  align-items: center;
 }
 
-.color_pink {
-  background-color: #ff79f2;
+.prompt_box {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-background-light);
+  color: var(--color-text-dark);
+  padding: 2.4rem 6.2rem;
+  box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
 }
 
-.color_cyan {
-  background-color: #22d3ee;
+.prompt_box__title {
+  font-size: 3.2rem;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+  line-height: 1.2;
+  margin-bottom: 3.2rem;
 }
 
-.color_salamon {
-  background-color: #f19576;
+.prompt_box__row {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.4rem;
+  justify-content: space-between;
+}
+
+.prompt_box__text {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.prompt_box__input {
+  padding: 0.8rem 2.4rem;
+  font-size: 1.8rem;
+  border-radius: 11px;
+  border: 1px solid var(--color-grey-medium);
+  text-transform: capitalize;
+}
+
+.prompt_box__input::placeholder {
+  font-size: 1.8rem;
+  color: var(--color-grey-dark);
+}
+
+.colors {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.color {
+  list-style: none;
+  background-color: var(--color-grey-dark);
+  padding: 1.8rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.btn__create_group {
+  margin-left: auto;
+  padding: 0.8rem 4.8rem;
+  align-self: flex-end;
+  margin-top: 1.2rem;
+  border-radius: 11px;
+  background-color: var(--color-primary-950);
+  color: var(--color-text-light);
 }
 
 /* BOX RIGHT (NOTES SECTION) */
 .box_right {
-  border: 1px solid rgb(0, 255, 85);
+  background-color: var(--color-primary-200);
 }

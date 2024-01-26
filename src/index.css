@@ -37,11 +37,11 @@ Bold - 700
 
 
 *********************** 06 : BORDER RADIUS  ********************
-Default:0.4rem;
-Semi-medium : 11px
-Medium : 15px
-Large : 17px;
-Extra-large : 80px 
+Default:0.4px;
+Semi-medium : 8px
+Medium : 11px
+Large : ;
+Extra-large :  
 
 
 
@@ -50,17 +50,23 @@ Extra-large : 80px
 - Spacing System (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 :root {
   --color-primary-950: #16008b;
   --color-primary-700: #0047ff;
+  --color-primary-400: #60a5fa;
+
+  --color-primary-200: #dae5f5;
 
   --color-text-dark: #212529;
   --color-text-light: #fff;
 
   --color-background-light: #fff;
-  --color-background-dark: #adb5bd;
+
+  --color-grey-dark: #9ca3af;
+  --color-grey-medium: #d9d9d9;
+  --color-grey-light: #e5e7eb;
 
   --color-red: #fa5252;
   --color-red-dark: #e03131;
@@ -83,16 +89,48 @@ html {
 }
 
 body {
-  font-family: 'Roboto', Rubik sans-serif;
+  font-family: "Roboto", Rubik sans-serif;
   background-color: var(--color-background-light);
   color: var(--color-text-dark);
   line-height: 1;
   font-weight: 400;
   overflow: hidden;
+  position: relative;
 }
 
 .icon {
   width: 4.4rem;
   height: 4.4rem;
   color: var(--color-text-light);
+}
+
+.color_purple {
+  background-color: var(--color-purple-light);
+}
+
+.color_pink {
+  background-color: var(--color-pink-light);
+}
+
+.color_sky {
+  background-color: var(--color-cyan-light);
+}
+
+.color_salamon {
+  background-color: var(--color-salamon-dark);
+}
+
+.color_blue {
+  background-color: var(--color-primary-950);
+}
+
+.color_blue_light {
+  background-color: var(--color-primary-400);
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  font-size: 1.8rem;
+  letter-spacing: 0.75px;
 }
