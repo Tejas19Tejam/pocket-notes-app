@@ -1,89 +1,106 @@
-import styles from "./app.module.css";
-import { FaPlus } from "react-icons/fa6";
+import styles from './app.module.css';
+import { useState } from 'react';
+import { FaPlus } from 'react-icons/fa6';
+
+import CreateGroup from './components/CreateGroup';
+import NotesBox from './components/NotesBox';
+import initialGroups from './groups';
+import Group from './components/Group';
 
 function App() {
+  const [activeGroupId, setActiveGroupId] = useState(null);
+  const [createGroup, setCreateGroup] = useState(false);
+  const [groups, setGroups] = useState(initialGroups);
+
+  // Derived state
+  const selectedGroup = groups?.find((group) => group.id === activeGroupId);
+  console.log(selectedGroup);
+
   return (
     <>
       <main className={styles.main}>
-        <section className={styles.box_left}>
-          <p className={styles.title}>Pocket Notes</p>
-
-          <ul className={styles.box_left__container} role="div">
-            <li className={`${styles.item}`} role="button">
-              <p className={`${styles.item_abbreviation} color_pink`}>PY</p>
-              <p className={styles.item_text}>Python Notes</p>
-            </li>
-            <li className={`${styles.item}`} role="button">
-              <p className={`${styles.item_abbreviation} color_pink`}>CS</p>
-              <p className={styles.item_text}>Computer Science</p>
-            </li>
-            <li className={`${styles.item}`} role="button">
-              <p className={`${styles.item_abbreviation}`}>PH</p>
-              <p className={styles.item_text}>Physics Notes</p>
-            </li>
-            <li className={styles.item} role="button">
-              <p className={styles.item_abbreviation}>CA</p>
-              <p className={styles.item_text}>Current Affairs</p>
-            </li>
-          </ul>
-          <button className={`btn ${styles.box_left__button}`}>
-            <FaPlus className="icon" />
-          </button>
-        </section>
-        {/* <div className={styles.prompt}> */}
-        <div className={styles.prompt_box}>
-          <p className={styles.prompt_box__title}>Create new group</p>
-          <div className={styles.prompt_box__row}>
-            <p className={styles.prompt_box__text}>Group name</p>
-            <input
-              type="text"
-              className={styles.prompt_box__input}
-              placeholder="Enter group name "
-            />
-          </div>
-          <div className={styles.prompt_box__row}>
-            <p className={styles.prompt_box__text}>Choose colour</p>
-            <ul className={styles.colors}>
-              <li
-                className={`${styles.color} color_purple`}
-                role="button"
-                value="purple"
-              ></li>
-              <li
-                className={`${styles.color} color_pink`}
-                role="button"
-                value="pink"
-              ></li>
-              <li
-                className={`${styles.color} color_sky`}
-                role="button"
-                value="sky"
-              ></li>
-              <li
-                className={`${styles.color} color_salamon`}
-                role="button"
-                value="salamon"
-              ></li>
-              <li
-                className={`${styles.color} color_blue`}
-                role="button"
-                value="blue"
-              ></li>
-              <li
-                className={`${styles.color} color_blue_light`}
-                role="button"
-                value="blue_light"
-              ></li>
-            </ul>
-          </div>
-          <button className={`btn ${styles.btn__create_group}`}>Create</button>
-        </div>
-        {/* </div> */}
-        <section className={styles.box_right}>
-          <h1>Main section</h1>
-        </section>
+        <NotesGroupBox createGroup={setCreateGroup}>
+          <GroupList
+            groups={groups}
+            activeGroupId={activeGroupId}
+            setActiveGroupId={setActiveGroupId}
+          />
+        </NotesGroupBox>
+        <NotesBox group={selectedGroup} />
+        {createGroup && (
+          <CreateGroup
+            closePrompt={() => setCreateGroup(false)}
+            setGroups={setGroups}
+          />
+        )}
       </main>
     </>
   );
 }
+
+function NotesGroupBox({ children, createGroup }) {
+  return (
+    <section className={styles.box_left}>
+      <p className={styles.title}>Pocket Notes</p>
+      {children}
+      <button
+        className={`btn ${styles.box_left__button}`}
+        onClick={() => createGroup(true)}
+      >
+        <FaPlus className="icon" />
+      </button>
+    </section>
+  );
+}
+
+function GroupList({ groups, activeGroupId, setActiveGroupId }) {
+  if (groups.length === 0)
+    return (
+      <h3>
+        Oops.... no groups are created, click on + button to create new group
+      </h3>
+    );
+  return (
+    <ul className={styles.box_left__container}>
+      {groups.map((group) => {
+        const groupState = {
+          color: group.color,
+          setActiveGroupId: setActiveGroupId,
+          activeGroupId,
+        };
+
+        return (
+          <GroupItem
+            key={group.id}
+            name={group.name}
+            myNotes={group.notes}
+            groupState={groupState}
+            groupId={group.id}
+          />
+        );
+      })}
+    </ul>
+  );
+}
+
+function GroupItem({ groupId, name, myNotes, groupState }) {
+  const [notes, setNotes] = useState(myNotes);
+
+  function handleShowNotes() {
+    groupState.setActiveGroupId(groupId);
+  }
+
+  return (
+    <li
+      className={`${styles.item} ${
+        groupState.activeGroupId === groupId && `${styles.active}`
+      }`}
+      role="button"
+      onClick={handleShowNotes}
+    >
+      <Group name={name} groupColor={groupState.color} />
+    </li>
+  );
+}
+
 export default App;
