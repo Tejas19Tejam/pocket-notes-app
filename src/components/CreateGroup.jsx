@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import styles from './CreateGroup.module.css';
+import { useEffect, useRef, useState } from "react";
+import styles from "./CreateGroup.module.css";
 
 function CreateGroup({ closePrompt, setGroups }) {
-  const [groupName, setGroupName] = useState('');
-  const [groupColor, setGroupColor] = useState('');
+  const [groupName, setGroupName] = useState("");
+  const [groupColor, setGroupColor] = useState("");
   const promptRef = useRef(null);
 
   // Unique Group ID
@@ -37,8 +37,8 @@ function CreateGroup({ closePrompt, setGroups }) {
 
   useEffect(() => {
     // Handle click outside on mount and unmount
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (

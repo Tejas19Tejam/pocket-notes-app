@@ -1,14 +1,20 @@
 /* BOX RIGHT (NOTES SECTION) */
-.box_right {
+.container {
   background-color: var(--color-primary-200);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   overflow-y: auto;
 }
 
 /* HOMESCREEN */
+
+.homescreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .illustration_img {
   margin-top: auto;
@@ -59,15 +65,31 @@
   align-items: center;
   color: var(--color-text-light);
   background-color: var(--color-primary-950);
-  padding: 1.8rem;
+  padding: 1.5rem;
 }
 
-.container {
+.notes_container {
   display: flex;
   flex-direction: column;
   margin-bottom: auto;
   padding-bottom: 2.4rem;
   overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: var(--color-text-dark);
+  border-radius: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--color-background-light);
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-clip: padding-box;
 }
 
 .note {
@@ -107,5 +129,53 @@
   margin-right: 3.4rem;
 }
 
-.note_time {
+.note_input_box {
+  position: relative;
+  border: none;
+  min-width: 100%;
+  /* min-height: 25%; */
+  padding: 2.4rem 3rem;
+  border-bottom-left-radius: 8px;
+  /* border-bottom-right-radius: 4px; */
+  background-color: var(--color-primary-950);
+}
+
+.note_input_box textarea {
+  min-width: 100%;
+  min-height: 100%;
+  border: none;
+  border-radius: 8px;
+  resize: none;
+  padding: 2.4rem 9.6rem 2.4rem 2.4rem;
+  font-size: 2.4rem;
+  letter-spacing: 0.63px;
+  line-height: 1.6;
+  font-weight: 500;
+  text-align: justify;
+}
+
+.note_input_box textarea::-webkit-scrollbar {
+  width: 0;
+}
+
+.note_input_box textarea::placeholder {
+  font-size: 2.4rem;
+  color: var(--color-grey-dark);
+}
+
+.note_input_box textarea:focus {
+}
+
+.send_icon {
+  position: absolute;
+  right: 3%;
+  transform: translate(-30%, -8%);
+  top: 50%;
+  bottom: 50%;
+  fill: var(--color-grey-dark);
+  cursor: pointer;
+}
+
+.send_icon.active {
+  fill: var(--color-text-dark);
 }

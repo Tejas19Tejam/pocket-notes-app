@@ -1,16 +1,21 @@
-import styles from './app.module.css';
-import { useState } from 'react';
-import { FaPlus } from 'react-icons/fa6';
+import styles from "./app.module.css";
+import { useState } from "react";
+import { FaPlus } from "react-icons/fa6";
 
-import CreateGroup from './components/CreateGroup';
-import NotesBox from './components/NotesBox';
-import initialGroups from './groups';
-import Group from './components/Group';
+import CreateGroup from "./components/CreateGroup";
+import NotesBox from "./components/NotesBox";
+import initialGroups from "./groups";
+import Group from "./components/Group";
+import { useLocalStorageState } from "./hooks/useLocalStorageState";
 
 function App() {
   const [activeGroupId, setActiveGroupId] = useState(null);
   const [createGroup, setCreateGroup] = useState(false);
-  const [groups, setGroups] = useState(initialGroups);
+  // const [selectedGroup, setSelectedGroup] = useState([]);
+
+  // const [groups, setGroups] = useState(initialGroups);
+
+  const [groups, setGroups] = useLocalStorageState([], "groups");
 
   // Derived state
   const selectedGroup = groups?.find((group) => group.id === activeGroupId);

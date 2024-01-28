@@ -1,107 +1,42 @@
-import Group from './Group';
-import styles from './NotesBox.module.css';
-import { IoMdLock } from 'react-icons/io';
+import { useEffect, useState } from "react";
+import Group from "./Group";
+import styles from "./NotesBox.module.css";
+import { IoMdLock } from "react-icons/io";
+import { MdSend } from "react-icons/md";
+import { getDateAndTime } from "../utils/helper";
+import NotesList from "./NotesList";
 
 function NotesBox({ group }) {
-  return (
-    <section className={styles.box_right}>
-      <header className={styles.header}>
-        {<Group name="Computer Science" groupColor="pink" />}
-      </header>
+  const [notes, setNotes] = useState([]);
+  const [grpName, setGrpName] = useState("");
+  const [grpColor, setGrpColor] = useState("");
 
-      <div className={styles.container}>
-        <div className={styles.note}>
-          <p className={styles.note_text}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-          <ul className={styles.note_timestamp}>
-            <li className={styles.note_date}>9 Mar 2023</li>
-            <li className={styles.note_time}>10:10 AM</li>
-          </ul>
-        </div>
-        <div className={styles.note}>
-          <p className={styles.note_text}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-          <ul className={styles.note_timestamp}>
-            <li className={styles.note_date}>9 Mar 2023</li>
-            <li className={styles.note_time}>10:10 AM</li>
-          </ul>
-        </div>
-        <div className={styles.note}>
-          <p className={styles.note_text}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-          <ul className={styles.note_timestamp}>
-            <li className={styles.note_date}>9 Mar 2023</li>
-            <li className={styles.note_time}>10:10 AM</li>
-          </ul>
-        </div>
-        <div className={styles.note}>
-          <p className={styles.note_text}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-          <ul className={styles.note_timestamp}>
-            <li className={styles.note_date}>9 Mar 2023</li>
-            <li className={styles.note_time}>10:10 AM</li>
-          </ul>
-        </div>
-        <div className={styles.note}>
-          <p className={styles.note_text}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-          <ul className={styles.note_timestamp}>
-            <li className={styles.note_date}>9 Mar 2023</li>
-            <li className={styles.note_time}>10:10 AM</li>
-          </ul>
-        </div>
-        <div className={styles.note}>
-          <p className={styles.note_text}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-          <ul className={styles.note_timestamp}>
-            <li className={styles.note_date}>9 Mar 2023</li>
-            <li className={styles.note_time}>10:10 AM</li>
-          </ul>
-        </div>
-      </div>
+  // const grpName = group?.name;
+  // const grpColor = group?.color;
+
+  useEffect(() => {
+    if (!group) return;
+    setGrpName(group.name);
+    setGrpColor(group.color);
+    setNotes(group.notes);
+  }, [group]);
+
+  if (!group) return <HomeScreen />;
+
+  return (
+    <section className={styles.container}>
+      <header className={styles.header}>
+        {<Group name={grpName} groupColor={grpColor} />}
+      </header>
+      <NotesList notes={notes} />
+      <CreateNote setNotes={setNotes} />
     </section>
   );
 }
 
 function HomeScreen() {
   return (
-    <>
+    <section className={styles.homescreen}>
       <img
         src="/images/image--1.png"
         alt="Peoples write on notes"
@@ -118,7 +53,47 @@ function HomeScreen() {
         <IoMdLock className={`icon ${styles.lock_icon}`} />
         <p className={styles.encrypted_text}>end-to-end encrypted</p>
       </div>
-    </>
+    </section>
+  );
+}
+
+function CreateNote({ setNotes }) {
+  const [text, setText] = useState("");
+
+  function handleCreateNote() {
+    if (!text) return;
+
+    // Unique Note ID
+    const uid = Math.floor(Math.random() * 9000 + 1000);
+    const [date, time] = getDateAndTime();
+
+    const newNote = {
+      noteId: uid,
+      text,
+      createdDate: date,
+      createdTime: time,
+    };
+
+    console.log(newNote);
+    setNotes((notes) => [...notes, newNote]);
+    setText("");
+  }
+
+  return (
+    <div className={styles.note_input_box}>
+      <textarea
+        placeholder="Enter your text here......"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <MdSend
+        className={`icon ${styles.send_icon} ${
+          text ? `${styles.active}` : ""
+        } `}
+        role="button"
+        onClick={handleCreateNote}
+      />
+    </div>
   );
 }
 
