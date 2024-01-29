@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useLocalStorageState(initialState, key) {
+export function useGroups(initialState, key) {
   const [value, setValue] = useState(() => {
     const groupList = localStorage.getItem(key);
     return groupList ? JSON.parse(groupList) : initialState;

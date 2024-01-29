@@ -1,4 +1,4 @@
-import styles from "./NotesBox.module.css";
+import styles from "./Notes.module.css";
 
 function Note({ note }) {
   return (

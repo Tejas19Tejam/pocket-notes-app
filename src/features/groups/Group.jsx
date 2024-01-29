@@ -1,5 +1,5 @@
-import styles from './Group.module.css';
-import { getAbbreviation } from '../utils/helper';
+import styles from "./Group.module.css";
+import { getAbbreviation } from "../../utils/helper";
 
 function Group({ name, groupColor }) {
   return (
